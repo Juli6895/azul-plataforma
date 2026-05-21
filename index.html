@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>+AZUL · Buceo · Kite · Vela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul:#1B1464; --azul2:#2a2080; --rojo:#ED1C24; --rojo2:#c4141b;
+  --fondo:#f4f6fb; --fondo2:#eef1f8; --blanco:#fff;
+  --texto:#1a1a2e; --sub:#5a6382; --gris:#8a97b0;
+  --linea:#e2e6f0; --linea2:#d0d5e8; --verde:#2e9e66;
+  --sh:0 2px 16px rgba(27,20,100,0.08);
+  --sh2:0 8px 32px rgba(27,20,100,0.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Barlow',sans-serif;background:var(--fondo);color:var(--texto);min-height:100vh;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--rojo);border-radius:2px;}
+button{cursor:pointer;transition:all 0.2s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
+  padding:0 36px;height:62px;background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(16px);border-bottom:2px solid var(--linea);box-shadow:var(--sh);}
+.logo{cursor:pointer;margin-right:44px;line-height:1;}
+.logo-main{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.55rem;letter-spacing:0.04em;}
+.logo-plus{color:var(--rojo);}
+.logo-name{color:var(--azul);}
+.logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gris);}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-btn{background:none;border:none;border-bottom:2px solid transparent;
+  font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--sub);padding:8px 16px;}
+.nav-btn:hover{color:var(--azul);}
+.nav-btn.active{color:var(--rojo);border-bottom-color:var(--rojo);}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.nav-notif{width:34px;height:34px;border-radius:50%;background:var(--fondo2);border:1px solid var(--linea);
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;position:relative;}
+.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;
+  background:var(--rojo);border:1px solid white;}
+.nav-av{width:34px;height:34px;border-radius:50%;background:var(--rojo);color:white;
+  display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.82rem;}
+
+/* VIEWS */
+.view{padding-top:62px;min-height:100vh;display:none;animation:fIn 0.38s ease forwards;}
+.view.active{display:block;}
+@keyframes fIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;min-height:470px;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:56px 60px 72px;background:var(--azul);}
+.hero-stripe{position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--rojo);z-index:2;}
+.hero-sail{position:absolute;right:80px;top:0;bottom:0;z-index:1;display:flex;align-items:center;opacity:0.16;}
+.hero-sail svg{height:380px;}
+.hero-eyebrow{position:relative;z-index:3;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.45);
+  margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.hero-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--rojo);}
+.hero-h1{position:relative;z-index:3;font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:4.6rem;line-height:0.9;text-transform:uppercase;color:white;margin-bottom:20px;}
+.hero-h1 em{display:block;font-family:'Barlow',sans-serif;font-style:italic;font-weight:300;
+  font-size:3.1rem;text-transform:none;letter-spacing:-0.02em;color:rgba(255,255,255,0.5);}
+.hero-sub{position:relative;z-index:3;font-size:0.98rem;color:rgba(255,255,255,0.52);
+  max-width:480px;line-height:1.65;margin-bottom:30px;font-weight:300;}
+.hero-btns{position:relative;z-index:3;display:flex;gap:12px;}
+.hero-wave{position:absolute;bottom:-1px;left:0;right:0;z-index:3;}
+.hero-wave svg{display:block;}
+
+/* BUTTONS */
+.btn-rojo{background:var(--rojo);color:white;border:none;font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:12px 28px;border-radius:2px;box-shadow:0 6px 20px rgba(237,28,36,0.4);}
+.btn-rojo:hover{background:var(--rojo2);transform:translateY(-1px);}
+.btn-wh{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.3);
+  font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:0.82rem;
+  letter-spacing:0.12em;text-transform:uppercase;padding:12px 28px;border-radius:2px;}
+.btn-wh:hover{background:rgba(255,255,255,0.18);}
+.btn-outline{background:transparent;color:var(--azul);border:1px solid var(--linea2);
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.76rem;
+  letter-spacing:0.12em;text-transform:uppercase;padding:10px 20px;border-radius:2px;}
+.btn-outline:hover{border-color:var(--azul);background:var(--fondo2);}
+.btn-sm{background:var(--azul);color:white;border:none;font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:6px 12px;border-radius:2px;}
+
+/* STATS STRIP */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);background:white;
+  border-bottom:3px solid var(--rojo);box-shadow:var(--sh);}
+.stat-item{padding:20px 28px;border-right:1px solid var(--linea);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:2.4rem;line-height:1;margin-bottom:2px;}
+.stat-num.r{color:var(--rojo);}
+.stat-num.a{color:var(--azul);}
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--gris);}
+
+/* SECTION */
+.section{padding:48px 60px;}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--linea);}
+.sec-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--azul);}
+.sec-title span{color:var(--rojo);}
+.sec-link{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--rojo);background:none;border:none;}
+
+/* TOUR CARDS */
+.tour-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.tour-grid-full{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:36px 60px;background:var(--fondo);}
+.tc{background:white;border:1px solid var(--linea);border-top:3px solid transparent;
+  border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.3s;box-shadow:var(--sh);}
+.tc:hover{border-top-color:var(--rojo);transform:translateY(-5px);box-shadow:var(--sh2);}
+.tc-img{height:160px;position:relative;overflow:hidden;}
+.tc-img-bg{position:absolute;inset:0;transition:transform 0.6s;}
+.tc:hover .tc-img-bg{transform:scale(1.05);}
+.tc-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(27,20,100,0.88) 100%);}
+.tc-badge{position:absolute;top:10px;left:10px;z-index:2;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  padding:3px 10px;border-radius:1px;color:white;}
+.tc-badge.buceo{background:var(--azul);}
+.tc-badge.kite{background:var(--rojo);}
+.tc-badge.vela{background:var(--azul2);}
+.tc-badge.combo{background:var(--rojo);}
+.tc-geo{position:absolute;bottom:10px;left:12px;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.4rem;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.tc-body{padding:14px 16px;}
+.tc-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;color:var(--azul);margin-bottom:10px;line-height:1.1;}
+.tc-meta{display:flex;gap:12px;margin-bottom:12px;}
+.tc-meta-i{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;color:var(--gris);}
+.tc-foot{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--linea);}
+.tc-price{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.4rem;color:var(--azul);line-height:1;}
+.tc-price small{font-family:'Barlow',sans-serif;font-weight:300;font-size:0.68rem;color:var(--gris);margin-left:2px;}
+.tcb-img{height:195px;position:relative;overflow:hidden;}
+.tcb-desc{font-size:0.82rem;color:var(--sub);line-height:1.6;margin-bottom:14px;font-weight:300;}
+.tcb-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:3px;overflow:hidden;margin-bottom:14px;}
+.tcb-info{background:var(--fondo);padding:9px 11px;}
+.tcb-info-l{font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--gris);margin-bottom:2px;}
+.tcb-info-v{font-size:0.86rem;font-weight:500;color:var(--texto);}
+.tcb-foot{display:flex;justify-content:space-between;align-items:center;}
+.tcb-price{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.7rem;color:var(--azul);line-height:1;}
+.tcb-price small{font-family:'Barlow',sans-serif;font-size:0.7rem;color:var(--gris);font-weight:300;}
+.btn-reservar{background:var(--rojo);color:white;border:none;font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:0.76rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:10px 20px;border-radius:2px;box-shadow:0 4px 14px rgba(237,28,36,0.3);}
+.btn-reservar:hover{background:var(--rojo2);transform:translateY(-1px);}
+
+/* PAGE HERO */
+.page-hero{padding:44px 60px 36px;border-bottom:3px solid var(--rojo);background:white;box-shadow:var(--sh);position:relative;overflow:hidden;}
+.page-hero::after{content:'+AZUL';position:absolute;right:-10px;top:50%;transform:translateY(-50%);
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:7rem;color:rgba(27,20,100,0.04);pointer-events:none;}
+.page-h1{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:3.2rem;text-transform:uppercase;color:var(--azul);margin-bottom:10px;line-height:0.95;}
+.page-h1 span{color:var(--rojo);}
+.page-sub{font-size:0.96rem;color:var(--sub);max-width:500px;line-height:1.6;font-weight:300;}
+
+/* FILTERS */
+.filter-row{display:flex;gap:8px;padding:16px 60px;background:white;border-bottom:1px solid var(--linea);overflow-x:auto;}
+.fbtn{background:var(--fondo);border:1px solid var(--linea2);color:var(--sub);
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.74rem;
+  letter-spacing:0.12em;text-transform:uppercase;padding:7px 18px;border-radius:100px;white-space:nowrap;}
+.fbtn:hover{color:var(--azul);border-color:var(--azul2);}
+.fbtn.on{background:var(--rojo);color:white;border-color:var(--rojo);}
+
+/* MI ESPACIO */
+.espacio-layout{display:grid;grid-template-columns:256px 1fr;min-height:calc(100vh - 62px);}
+.sidebar{border-right:1px solid var(--linea);background:white;padding:24px 0;
+  position:sticky;top:62px;height:calc(100vh - 62px);overflow-y:auto;
+  box-shadow:2px 0 12px rgba(27,20,100,0.05);}
+.sb-prof{padding:0 18px 20px;border-bottom:1px solid var(--linea);margin-bottom:8px;}
+.sb-av{width:50px;height:50px;border-radius:50%;background:var(--rojo);color:white;
+  display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;
+  font-weight:700;font-size:1.25rem;margin-bottom:12px;border:2px solid rgba(237,28,36,0.3);}
+.sb-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.98rem;text-transform:uppercase;color:var(--azul);margin-bottom:2px;}
+.sb-level{font-family:'Barlow Condensed',sans-serif;font-size:0.63rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--gris);margin-bottom:10px;}
+.sb-cert{display:inline-flex;align-items:center;gap:5px;background:rgba(27,20,100,0.06);border:1px solid rgba(27,20,100,0.15);border-radius:2px;padding:4px 10px;font-family:'Barlow Condensed',sans-serif;font-size:0.58rem;color:var(--azul2);text-transform:uppercase;letter-spacing:0.1em;}
+.sb-menu{padding:8px 10px 0;}
+.sb-item{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:6px;
+  font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--sub);background:none;
+  border:none;border-left:2px solid transparent;width:100%;text-align:left;margin-bottom:2px;}
+.sb-item:hover{background:var(--fondo2);color:var(--azul);}
+.sb-item.sel{background:rgba(237,28,36,0.06);color:var(--rojo);border-left-color:var(--rojo);}
+.sb-badge{margin-left:auto;background:var(--rojo);color:white;font-family:'Barlow Condensed',sans-serif;font-size:0.56rem;padding:1px 6px;border-radius:1px;}
+.espacio-main{padding:30px 36px;}
+.esec{display:none;}
+.esec.active{display:block;animation:fIn 0.32s ease;}
+.esec-head{margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--linea);display:flex;justify-content:space-between;align-items:center;}
+.esec-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;color:var(--azul);}
+.esec-title span{color:var(--rojo);}
+
+/* TRIP CARDS */
+.trip-list{display:flex;flex-direction:column;gap:10px;}
+.trip-card{background:white;border:1px solid var(--linea);border-radius:6px;padding:16px 20px;
+  display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;
+  cursor:pointer;transition:all 0.22s;box-shadow:var(--sh);}
+.trip-card:hover{border-color:rgba(237,28,36,0.3);transform:translateX(2px);box-shadow:var(--sh2);}
+.trip-ic{width:44px;height:44px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.trip-ic.b{background:rgba(27,20,100,0.07);}
+.trip-ic.k{background:rgba(237,28,36,0.07);}
+.trip-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.98rem;text-transform:uppercase;color:var(--azul);margin-bottom:3px;}
+.trip-meta{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.07em;}
+.trip-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+.status-p{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;padding:3px 9px;border-radius:2px;}
+.status-p.up{background:rgba(237,28,36,0.08);color:var(--rojo);border:1px solid rgba(237,28,36,0.2);}
+.status-p.done{background:rgba(27,20,100,0.07);color:var(--azul2);border:1px solid rgba(27,20,100,0.15);}
+.trip-lnk{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;color:var(--rojo);background:none;border:none;text-transform:uppercase;letter-spacing:0.08em;}
+
+/* BITÁCORAS */
+.bita-layout{display:grid;grid-template-columns:300px 1fr;gap:20px;}
+.bita-list{display:flex;flex-direction:column;gap:8px;}
+.bita-item{background:white;border:1px solid var(--linea);border-left:3px solid transparent;
+  border-radius:6px;padding:14px 16px;cursor:pointer;transition:all 0.22s;box-shadow:var(--sh);}
+.bita-item:hover{border-left-color:var(--rojo);transform:translateX(2px);}
+.bita-item.active{border-left-color:var(--rojo);box-shadow:var(--sh2);}
+.bita-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;line-height:0.9;color:rgba(237,28,36,0.15);margin-bottom:6px;}
+.bita-item.active .bita-num{color:rgba(237,28,36,0.4);}
+.bita-place{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.92rem;text-transform:uppercase;color:var(--azul);margin-bottom:2px;line-height:1.1;}
+.bita-date{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
+.bita-mini-stats{display:flex;gap:10px;}
+.bms{text-align:center;}
+.bms-v{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--rojo);display:block;line-height:1;}
+.bms-l{font-family:'Barlow Condensed',sans-serif;font-size:0.52rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.08em;}
+.stars{display:flex;gap:2px;margin-top:8px;}
+.star-f{color:var(--rojo);font-size:0.75rem;}
+.star-e{color:var(--linea2);font-size:0.75rem;}
+/* Bita detail */
+.bita-detail-card{background:white;border:1px solid var(--linea);border-top:3px solid var(--rojo);border-radius:6px;padding:18px 20px;margin-bottom:14px;box-shadow:var(--sh);}
+.bita-detail-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;color:var(--azul);line-height:1;margin-bottom:3px;}
+.bita-detail-date{font-family:'Barlow Condensed',sans-serif;font-size:0.66rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;}
+.stat4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:4px;overflow:hidden;}
+.s4i{background:var(--fondo);padding:10px 12px;}
+.s4l{font-family:'Barlow Condensed',sans-serif;font-size:0.57rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--gris);margin-bottom:2px;}
+.s4v{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--rojo);line-height:1;}
+/* Photos */
+.photos-card{background:white;border:1px solid var(--linea);border-radius:6px;padding:18px 20px;box-shadow:var(--sh);}
+.photos-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.photos-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;text-transform:uppercase;color:var(--azul);}
+.photos-title span{color:var(--rojo);}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px;}
+.photo-item{border-radius:6px;overflow:hidden;border:1px solid var(--linea);}
+.photo-img{height:130px;position:relative;display:flex;align-items:center;justify-content:center;}
+.photo-emoji{font-size:3.2rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));}
+.photo-ov{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(27,20,100,0.85));padding:18px 12px 8px;}
+.photo-desc{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.08em;}
+.photo-tags{padding:9px 12px;background:var(--fondo);}
+.photo-tags-label{font-family:'Barlow Condensed',sans-serif;font-size:0.57rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--gris);margin-bottom:5px;}
+.tags-row{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{display:inline-flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.08em;padding:2px 8px;border-radius:100px;border:1px solid;}
+.tag-add{background:none;border:1px dashed var(--linea2);color:var(--gris);font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;letter-spacing:0.08em;padding:2px 8px;border-radius:100px;}
+/* Community bar */
+.community-bar{margin-top:14px;padding-top:14px;border-top:1px solid var(--linea);}
+.community-bar-label{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--gris);margin-bottom:8px;}
+.community-avatars{display:flex;flex-wrap:wrap;gap:7px;}
+.comm-av-wrap{display:flex;align-items:center;gap:6px;background:white;border:1px solid var(--linea);border-radius:100px;padding:5px 12px 5px 6px;}
+.comm-av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.62rem;color:white;}
+.comm-handle{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;color:var(--texto);letter-spacing:0.04em;}
+
+/* COLECCIONES */
+.col-tabs{display:flex;gap:8px;margin-bottom:20px;}
+.col-tab{background:var(--fondo2);border:1px solid var(--linea2);color:var(--sub);
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.78rem;
+  letter-spacing:0.1em;text-transform:uppercase;padding:8px 20px;border-radius:100px;}
+.col-tab.on{background:var(--rojo);color:white;border-color:var(--rojo);}
+.col-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:6px;overflow:hidden;margin-bottom:20px;}
+.col-stat{background:var(--fondo);padding:12px 16px;}
+.col-stat-l{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--gris);margin-bottom:3px;}
+.col-stat-v{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.5rem;color:var(--azul);line-height:1;}
+.col-stat-v.r{color:var(--rojo);}
+.col-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.col-card{background:white;border:1px solid var(--linea);border-top:3px solid transparent;
+  border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.25s;box-shadow:var(--sh);}
+.col-card:hover{border-top-color:var(--rojo);transform:translateY(-3px);box-shadow:var(--sh2);}
+.col-card.open{border-top-color:var(--rojo);box-shadow:var(--sh2);}
+.col-img{height:90px;position:relative;display:flex;align-items:center;justify-content:center;}
+.col-emoji{font-size:2.4rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));}
+.col-rare{position:absolute;top:7px;right:7px;background:rgba(237,28,36,0.85);color:white;
+  font-family:'Barlow Condensed',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.12em;
+  text-transform:uppercase;padding:2px 7px;border-radius:1px;}
+.col-visits{position:absolute;bottom:7px;right:7px;background:rgba(27,20,100,0.8);color:white;
+  font-family:'Barlow Condensed',sans-serif;font-size:0.55rem;font-weight:600;padding:2px 7px;border-radius:1px;}
+.col-body{padding:12px 12px 10px;}
+.col-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.88rem;text-transform:uppercase;color:var(--azul);margin-bottom:2px;line-height:1.1;}
+.col-sci{font-family:'Barlow',sans-serif;font-style:italic;font-size:0.67rem;color:var(--gris);margin-bottom:5px;}
+.col-foot{display:flex;justify-content:space-between;align-items:center;}
+.col-loc{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.07em;}
+.col-cnt{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.9rem;color:var(--rojo);}
+.col-expand{border-top:1px solid var(--linea);padding:10px 12px;background:var(--fondo);display:none;}
+.col-card.open .col-expand{display:block;}
+.col-expand-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.ceg-item-l{font-family:'Barlow Condensed',sans-serif;font-size:0.57rem;text-transform:uppercase;color:var(--gris);letter-spacing:0.1em;margin-bottom:1px;}
+.ceg-item-v{font-size:0.8rem;font-weight:500;color:var(--texto);}
+.col-expand-row{display:flex;justify-content:space-between;align-items:center;}
+
+/* PAGOS */
+.pago-card{background:white;border:1px solid var(--linea);border-radius:6px;padding:24px;margin-bottom:14px;box-shadow:var(--sh);}
+.pago-card.pending{border-left:3px solid var(--rojo);}
+.pago-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.pago-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;color:var(--azul);margin-bottom:3px;}
+.pago-date{font-size:0.74rem;color:var(--gris);font-weight:300;}
+.pago-total{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.65rem;color:var(--azul);text-align:right;line-height:1;}
+.pago-total-l{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.1em;text-align:right;}
+.pbar-labels{display:flex;justify-content:space-between;margin-bottom:7px;font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--gris);}
+.pbar-labels strong{color:var(--rojo);}
+.pbar{height:6px;background:var(--fondo2);border-radius:3px;border:1px solid var(--linea);overflow:hidden;margin-bottom:14px;}
+.pbar-fill{height:100%;border-radius:3px;}
+.cuotas{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.cuota{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:6px;background:var(--fondo);border:1px solid var(--linea);}
+.cdot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.cdot.paid{background:var(--verde);}
+.cdot.pend{background:var(--rojo);}
+.cdot.fut{background:var(--linea2);}
+.cuota-name{flex:1;font-size:0.84rem;}
+.cuota-date{font-family:'Barlow Condensed',sans-serif;font-size:0.64rem;color:var(--gris);text-transform:uppercase;}
+.cuota-amt{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.9rem;color:var(--azul);min-width:62px;text-align:right;}
+.cuota-st{font-family:'Barlow Condensed',sans-serif;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;min-width:54px;text-align:right;}
+.cuota-st.paid{color:var(--verde);}
+.cuota-st.pend{color:var(--rojo);}
+.cuota-st.fut{color:var(--gris);}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.cert-card{background:white;border:1px solid var(--linea);border-radius:6px;padding:18px;cursor:pointer;transition:all 0.25s;box-shadow:var(--sh);}
+.cert-card:hover{border-color:var(--rojo);transform:translateY(-2px);box-shadow:var(--sh2);}
+.cert-ic{font-size:1.8rem;margin-bottom:10px;}
+.cert-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.9rem;text-transform:uppercase;color:var(--azul);margin-bottom:3px;}
+.cert-org{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;}
+.cert-valid{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;color:var(--verde);display:flex;align-items:center;gap:5px;text-transform:uppercase;letter-spacing:0.08em;}
+
+/* COMUNIDAD */
+.com-layout{display:grid;grid-template-columns:1fr 286px;min-height:calc(100vh - 62px);}
+.com-main{padding:32px 36px;background:var(--fondo);}
+.com-aside{padding:24px 20px;background:white;border-left:1px solid var(--linea);}
+.post-card{background:white;border:1px solid var(--linea);border-left:3px solid var(--rojo);
+  border-radius:6px;padding:18px;margin-bottom:10px;cursor:pointer;
+  transition:all 0.22s;box-shadow:var(--sh);}
+.post-card:hover{transform:translateX(2px);box-shadow:var(--sh2);}
+.post-head{display:flex;align-items:center;gap:9px;margin-bottom:9px;}
+.post-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.8rem;flex-shrink:0;}
+.post-author{font-size:0.86rem;font-weight:600;}
+.post-time{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-size:0.63rem;color:var(--gris);text-transform:uppercase;}
+.post-title{font-family:'Barlow',sans-serif;font-weight:600;font-size:1rem;margin-bottom:6px;line-height:1.3;}
+.post-excerpt{font-size:0.8rem;color:var(--sub);line-height:1.6;margin-bottom:10px;font-weight:300;}
+.post-foot{display:flex;align-items:center;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:0.64rem;color:var(--gris);text-transform:uppercase;}
+.post-tag{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;padding:3px 8px;border-radius:1px;}
+.mar-widget{background:var(--azul);border-radius:6px;padding:18px;margin-bottom:18px;}
+.mar-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.92rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--rojo);margin-bottom:3px;}
+.mar-loc{font-family:'Barlow Condensed',sans-serif;font-size:0.63rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;}
+.mar-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.mar-stat{text-align:center;padding:8px;background:rgba(255,255,255,0.07);border-radius:3px;}
+.mar-stat-v{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.4rem;color:white;display:block;line-height:1;margin-bottom:2px;}
+.mar-stat-l{font-family:'Barlow Condensed',sans-serif;font-size:0.55rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.12em;}
+.aside-tit{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--azul);padding-bottom:7px;border-bottom:2px solid var(--rojo);margin-bottom:10px;}
+.mini-tour{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--linea);cursor:pointer;transition:all 0.2s;}
+.mini-tour:last-child{border-bottom:none;}
+.mini-tour:hover{padding-left:3px;}
+.mini-dot{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
+.mini-name{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.84rem;text-transform:uppercase;color:var(--azul);margin-bottom:1px;}
+.mini-date{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;color:var(--gris);text-transform:uppercase;}
+.com-stats-box{background:var(--fondo);border:1px solid var(--linea);border-top:3px solid var(--rojo);border-radius:6px;padding:16px;}
+.cs-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--linea);}
+.cs-row:last-child{border-bottom:none;}
+.cs-l{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.68rem;color:var(--gris);}
+.cs-v{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;}
+
+/* GRADIENTS */
+.g1{background:linear-gradient(135deg,#0a1f3c,#1d4a7a);}
+.g2{background:linear-gradient(135deg,#3c0a0a,#601a1a);}
+.g3{background:linear-gradient(135deg,#0a2a1f,#1a4a30);}
+.g4{background:linear-gradient(135deg,#1a0a2a,#2a1a4a);}
+.g5{background:linear-gradient(135deg,#2a1a0a,#4a2a1a);}
+.g6{background:linear-gradient(135deg,#0a2a3a,#1a4a5a);}
+.g7{background:linear-gradient(135deg,#0a2a2a,#1a5050);}
+.g8{background:linear-gradient(135deg,#1a1a3c,#3a3a6a);}
+.g9{background:linear-gradient(135deg,#3c1a0a,#6a2a0a);}
+
+@media(max-width:1100px){
+  .tour-grid,.tour-grid-full{grid-template-columns:repeat(2,1fr);}
+  .espacio-layout{grid-template-columns:1fr;}
+  .sidebar{position:static;height:auto;}
+  .com-layout{grid-template-columns:1fr;}
+  .bita-layout{grid-template-columns:1fr;}
+  .col-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:700px){
+  .tour-grid,.tour-grid-full,.col-grid,.cert-grid{grid-template-columns:1fr;}
+  .section,.page-hero,.tour-grid-full,.filter-row{padding-left:20px;padding-right:20px;}
+  .hero{padding:44px 20px 60px;}
+  .stats-strip{grid-template-columns:repeat(2,1fr);}
+  nav{padding:0 16px;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo" onclick="showView('home')">
+    <div class="logo-main"><span class="logo-plus">+</span><span class="logo-name">AZUL</span></div>
+    <div class="logo-sub">Buceo &middot; Kite &middot; Vela</div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showView('home',this)">Inicio</button>
+    <button class="nav-btn" onclick="showView('tours',this)">Tours</button>
+    <button class="nav-btn" onclick="showView('espacio',this)">Mi Espacio</button>
+    <button class="nav-btn" onclick="showView('comunidad',this)">Comunidad</button>
+  </div>
+  <div class="nav-right">
+    <div class="nav-notif">&#128276;<div class="notif-dot"></div></div>
+    <div class="nav-av">CM</div>
+  </div>
+</nav>
+<div class="view active" id="view-home">
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-sail">
+      <svg viewBox="0 0 220 380" fill="none">
+        <defs><linearGradient id="sg" x1="40" y1="360" x2="210" y2="20" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#ED1C24" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#ED1C24" stop-opacity="0.2"/>
+        </linearGradient></defs>
+        <path d="M40 360 L160 20 L210 280 Z" fill="url(#sg)"/>
+        <path d="M40 360 L100 30 L130 240 Z" fill="white" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow">Tu instructor &middot; Tu amigo &middot; Tu aventura</div>
+    <h1 class="hero-h1">EL OC&Eacute;ANO<br><em>te est&aacute; llamando.</em></h1>
+    <p class="hero-sub">+AZUL es el amigo que te acompa&ntilde;a en tus actividades de aventura. Buceo, kitesurf y vela &mdash; grupos peque&ntilde;os, instructores PADI &middot; CMAS &middot; IKO certificados.</p>
+    <div class="hero-btns">
+      <button class="btn-rojo" onclick="showView('tours',document.querySelectorAll('.nav-btn')[1])">Ver tours 2026</button>
+      <button class="btn-wh" onclick="showView('espacio',document.querySelectorAll('.nav-btn')[2])">Mi espacio</button>
+    </div>
+    <div class="hero-wave"><svg viewBox="0 0 1440 52" preserveAspectRatio="none" fill="none">
+      <path d="M0,38 C360,8 900,48 1200,18 C1340,4 1420,32 1440,38 L1440,52 L0,52 Z" fill="#f4f6fb"/>
+    </svg></div>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-num r">+10</div><div class="stat-label">A&ntilde;os de experiencia</div></div>
+    <div class="stat-item"><div class="stat-num a">6,200</div><div class="stat-label">Aventureros en la comunidad</div></div>
+    <div class="stat-item"><div class="stat-num r">847</div><div class="stat-label">Inmersiones registradas</div></div>
+    <div class="stat-item"><div class="stat-num a">34</div><div class="stat-label">Destinos explorados</div></div>
+  </div>
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-title">Pr&oacute;ximos <span>Tours</span></div>
+      <button class="sec-link" onclick="showView('tours',document.querySelectorAll('.nav-btn')[1])">Ver todos &rarr;</button>
+    </div>
+    <div class="tour-grid">
+      <div class="tc"><div class="tc-img"><div class="tc-img-bg g1"></div><div class="tc-ov"></div><div class="tc-geo">Gal&aacute;pagos</div><span class="tc-badge buceo">&#x1F93F; Buceo</span></div><div class="tc-body"><div class="tc-name">Gal&aacute;pagos Deep Expedition</div><div class="tc-meta"><span class="tc-meta-i">&#128197; Jul 14&ndash;22</span><span class="tc-meta-i">&#9203; 8 d&iacute;as</span></div><div class="tc-foot"><div class="tc-price">$2,400<small>USD</small></div><div style="font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;color:var(--rojo)">3 cupos</div></div></div></div>
+      <div class="tc"><div class="tc-img"><div class="tc-img-bg g2"></div><div class="tc-ov"></div><div class="tc-geo">Cartagena</div><span class="tc-badge kite">&#x1FA81; Kitesurf</span></div><div class="tc-body"><div class="tc-name">Kite Sessions Bocachico</div><div class="tc-meta"><span class="tc-meta-i">&#128197; Jun 28&ndash;Jul 3</span><span class="tc-meta-i">&#9203; 6 d&iacute;as</span></div><div class="tc-foot"><div class="tc-price">$1,100<small>USD</small></div><div style="font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;color:#e07020">5 cupos</div></div></div></div>
+      <div class="tc"><div class="tc-img"><div class="tc-img-bg g3"></div><div class="tc-ov"></div><div class="tc-geo">Nqu&iacute;</div><span class="tc-badge buceo">&#x1F93F; Buceo</span></div><div class="tc-body"><div class="tc-name">Nqu&iacute; Wildlife Diving</div><div class="tc-meta"><span class="tc-meta-i">&#128197; Sep 5&ndash;10</span><span class="tc-meta-i">&#9203; 6 d&iacute;as</span></div><div class="tc-foot"><div class="tc-price">$1,600<small>USD</small></div><div style="font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;color:var(--verde)">8 cupos</div></div></div></div>
+    </div>
+  </div>
+</div>
+<div class="view" id="view-tours">
+  <div class="page-hero">
+    <div class="page-h1">Tours <span>+AZUL</span> 2026</div>
+    <div class="page-sub">Expediciones de buceo, kitesurf y vela. Grupos peque&ntilde;os, instructores PADI &middot; CMAS &middot; IKO certificados.</div>
+  </div>
+  <div class="filter-row">
+    <button class="fbtn on" onclick="setF(this,'all')">Todos</button>
+    <button class="fbtn" onclick="setF(this,'buceo')">&#x1F93F; Buceo</button>
+    <button class="fbtn" onclick="setF(this,'kite')">&#x1FA81; Kitesurf</button>
+    <button class="fbtn" onclick="setF(this,'vela')">&#9973; Vela</button>
+    <button class="fbtn" onclick="setF(this,'inter')">&#9992;&#65039; Internacional</button>
+    <button class="fbtn" onclick="setF(this,'nal')">&#127464;&#127476; Nacional</button>
+  </div>
+  <div class="tour-grid-full">
+    <div class="tc tc-big" data-t="buceo inter"><div class="tcb-img tc-img"><div class="tc-img-bg g1"></div><div class="tc-ov"></div><div class="tc-geo">Gal&aacute;pagos</div><span class="tc-badge buceo" style="position:absolute;top:12px;left:12px;z-index:2">&#x1F93F; Buceo</span></div><div class="tc-body"><div style="font-style:italic;font-size:0.78rem;color:var(--gris);margin-bottom:4px">&#128205; Ecuador &middot; Islas Gal&aacute;pagos</div><div class="tc-name" style="font-size:1.3rem">Gal&aacute;pagos Deep Expedition</div><div class="tcb-desc">Nada junto a tiburones de Gal&aacute;pagos, tortugas gigantes y mantas raya en uno de los ecosistemas marinos m&aacute;s &uacute;nicos del planeta.</div><div class="tcb-row"><div class="tcb-info"><div class="tcb-info-l">Fechas</div><div class="tcb-info-v">Jul 14&ndash;22</div></div><div class="tcb-info"><div class="tcb-info-l">Duraci&oacute;n</div><div class="tcb-info-v">8 d&iacute;as</div></div><div class="tcb-info"><div class="tcb-info-l">Cupos</div><div class="tcb-info-v" style="color:var(--rojo)">3 restantes</div></div></div><div class="tcb-foot"><div class="tcb-price">$2,400<small> USD</small></div><button class="btn-reservar">Reservar</button></div></div></div>
+    <div class="tc tc-big" data-t="kite nal"><div class="tcb-img tc-img"><div class="tc-img-bg g2"></div><div class="tc-ov"></div><div class="tc-geo">Cartagena</div><span class="tc-badge kite" style="position:absolute;top:12px;left:12px;z-index:2">&#x1FA81; Kitesurf</span></div><div class="tc-body"><div style="font-style:italic;font-size:0.78rem;color:var(--gris);margin-bottom:4px">&#128205; Colombia &middot; Cartagena</div><div class="tc-name" style="font-size:1.3rem">Kite Sessions Bocachico</div><div class="tcb-desc">Vientos alisios perfectos, aguas templadas del Caribe y playas v&iacute;rgenes. El spot colombiano que todo kiter debe conocer.</div><div class="tcb-row"><div class="tcb-info"><div class="tcb-info-l">Fechas</div><div class="tcb-info-v">Jun 28&ndash;Jul 3</div></div><div class="tcb-info"><div class="tcb-info-l">Duraci&oacute;n</div><div class="tcb-info-v">6 d&iacute;as</div></div><div class="tcb-info"><div class="tcb-info-l">Cupos</div><div class="tcb-info-v" style="color:#e07020">5 restantes</div></div></div><div class="tcb-foot"><div class="tcb-price">$1,100<small> USD</small></div><button class="btn-reservar">Reservar</button></div></div></div>
+    <div class="tc tc-big" data-t="vela nal"><div class="tcb-img tc-img"><div class="tc-img-bg g6"></div><div class="tc-ov"></div><div class="tc-geo">San Andr&eacute;s</div><span class="tc-badge vela" style="position:absolute;top:12px;left:12px;z-index:2">&#9973; Vela</span></div><div class="tc-body"><div style="font-style:italic;font-size:0.78rem;color:var(--gris);margin-bottom:4px">&#128205; Colombia &middot; San Andr&eacute;s</div><div class="tc-name" style="font-size:1.3rem">Velero Caribe Colombiano</div><div class="tcb-desc">El primer tour formal en velero por el Caribe colombiano de +AZUL. Navega desde San Andr&eacute;s hasta los cayos m&aacute;s remotos del archipi&eacute;lago.</div><div class="tcb-row"><div class="tcb-info"><div class="tcb-info-l">Fechas</div><div class="tcb-info-v">Jul 26&ndash;Ago 2</div></div><div class="tcb-info"><div class="tcb-info-l">Duraci&oacute;n</div><div class="tcb-info-v">8 d&iacute;as</div></div><div class="tcb-info"><div class="tcb-info-l">Cupos</div><div class="tcb-info-v" style="color:var(--verde)">6 restantes</div></div></div><div class="tcb-foot"><div class="tcb-price">$2,100<small> USD</small></div><button class="btn-reservar">Reservar</button></div></div></div>
+    <div class="tc tc-big" data-t="buceo nal"><div class="tcb-img tc-img"><div class="tc-img-bg g3"></div><div class="tc-ov"></div><div class="tc-geo">Nqu&iacute;</div><span class="tc-badge buceo" style="position:absolute;top:12px;left:12px;z-index:2">&#x1F93F; Buceo</span></div><div class="tc-body"><div style="font-style:italic;font-size:0.78rem;color:var(--gris);margin-bottom:4px">&#128205; Colombia &middot; Choc&oacute;</div><div class="tc-name" style="font-size:1.3rem">Nqu&iacute; Wildlife Diving</div><div class="tcb-desc">Ballenas jorobadas, tiburones ballena y corales negros &uacute;nicos del Pac&iacute;fico colombiano. La joya que pocas personas conocen.</div><div class="tcb-row"><div class="tcb-info"><div class="tcb-info-l">Fechas</div><div class="tcb-info-v">Sep 5&ndash;10</div></div><div class="tcb-info"><div class="tcb-info-l">Duraci&oacute;n</div><div class="tcb-info-v">6 d&iacute;as</div></div><div class="tcb-info"><div class="tcb-info-l">Cupos</div><div class="tcb-info-v" style="color:var(--verde)">8 restantes</div></div></div><div class="tcb-foot"><div class="tcb-price">$1,600<small> USD</small></div><button class="btn-reservar">Reservar</button></div></div></div>
+    <div class="tc tc-big" data-t="kite inter"><div class="tcb-img tc-img"><div class="tc-img-bg g5"></div><div class="tc-ov"></div><div class="tc-geo">Tarifa</div><span class="tc-badge kite" style="position:absolute;top:12px;left:12px;z-index:2">&#x1FA81; Kitesurf</span></div><div class="tc-body"><div style="font-style:italic;font-size:0.78rem;color:var(--gris);margin-bottom:4px">&#128205; Espa&ntilde;a &middot; Estrecho</div><div class="tc-name" style="font-size:1.3rem">Tarifa Wind Experience</div><div class="tcb-desc">La capital mundial del viento. Cursos intensivos en el Estrecho de Gibraltar con los mejores instructores IKO de Europa.</div><div class="tcb-row"><div class="tcb-info"><div class="tcb-info-l">Fechas</div><div class="tcb-info-v">Oct 11&ndash;18</div></div><div class="tcb-info"><div class="tcb-info-l">Duraci&oacute;n</div><div class="tcb-info-v">8 d&iacute;as</div></div><div class="tcb-info"><div class="tcb-info-l">Cupos</div><div class="tcb-info-v" style="color:#e07020">6 restantes</div></div></div><div class="tcb-foot"><div class="tcb-price">$3,200<small> USD</small></div><button class="btn-reservar">Reservar</button></div></div></div>
+    <div class="tc tc-big" data-t="buceo kite nal"><div class="tcb-img tc-img"><div class="tc-img-bg g4"></div><div class="tc-ov"></div><div class="tc-geo">San Andr&eacute;s</div><span class="tc-badge combo" style="position:absolute;top:12px;left:12px;z-index:2">&#x1F93F;+&#x1FA81; Combo</span></div><div class="tc-body"><div style="font-style:italic;font-size:0.78rem;color:var(--gris);margin-bottom:4px">&#128205; Colombia &middot; San Andr&eacute;s</div><div class="tc-name" style="font-size:1.3rem">Isla Combo: Dive &amp; Kite</div><div class="tcb-desc">Ma&ntilde;anas bajo el agua en el Sea Flower Reserve, tardes volando sobre la laguna del Cove. El mejor plan doble del Caribe.</div><div class="tcb-row"><div class="tcb-info"><div class="tcb-info-l">Fechas</div><div class="tcb-info-v">Nov 15&ndash;22</div></div><div class="tcb-info"><div class="tcb-info-l">Duraci&oacute;n</div><div class="tcb-info-v">8 d&iacute;as</div></div><div class="tcb-info"><div class="tcb-info-l">Cupos</div><div class="tcb-info-v" style="color:var(--verde)">10 restantes</div></div></div><div class="tcb-foot"><div class="tcb-price">$1,900<small> USD</small></div><button class="btn-reservar">Reservar</button></div></div></div>
+  </div>
+</div>
+<div class="view" id="view-espacio">
+  <div class="espacio-layout">
+    <aside class="sidebar">
+      <div class="sb-prof">
+        <div class="sb-av">CM</div>
+        <div class="sb-name">Carlos M&eacute;ndez</div>
+        <div class="sb-level">PADI Divemaster &middot; IKO Nivel 2</div>
+        <span class="sb-cert">&#9679; Certificaciones vigentes</span>
+      </div>
+      <div class="sb-menu">
+        <button class="sb-item sel" onclick="showE('viajes',this)">&#128506;&#65039; Mis Viajes</button>
+        <button class="sb-item" onclick="showE('bita',this)">&#128214; Bit&aacute;coras</button>
+        <button class="sb-item" onclick="showE('colecciones',this)">&#x1F41F; Colecciones</button>
+        <button class="sb-item" onclick="showE('pagos',this)">&#128179; Mis Pagos<span class="sb-badge">1</span></button>
+        <button class="sb-item" onclick="showE('certs',this)">&#127891; Certificados</button>
+      </div>
+    </aside>
+    <main class="espacio-main">
+      <div class="esec active" id="es-viajes">
+        <div class="esec-head"><div class="esec-title">Mis <span>Viajes</span></div></div>
+        <div class="trip-list">
+          <div class="trip-card"><div class="trip-ic b">&#x1F93F;</div><div><div class="trip-name">Gal&aacute;pagos Deep Expedition</div><div class="trip-meta">&#128205; Ecuador &middot; Jul 14&ndash;22, 2026 &middot; 8 d&iacute;as</div></div><div class="trip-right"><span class="status-p up">Pr&oacute;ximo</span><button class="trip-lnk">Ver detalles &rarr;</button></div></div>
+          <div class="trip-card"><div class="trip-ic k">&#x1FA81;</div><div><div class="trip-name">Kite Sessions Bocachico</div><div class="trip-meta">&#128205; Cartagena &middot; Mar 10&ndash;15, 2026 &middot; 6 d&iacute;as</div></div><div class="trip-right"><span class="status-p done">Completado</span><button class="trip-lnk" onclick="showE('bita',document.querySelectorAll('.sb-item')[1])">Ver bit&aacute;cora &rarr;</button></div></div>
+          <div class="trip-card"><div class="trip-ic b">&#x1F93F;</div><div><div class="trip-name">Nqu&iacute; Wildlife Diving</div><div class="trip-meta">&#128205; Choc&oacute; &middot; Nov 8&ndash;13, 2025 &middot; 14 inmersiones</div></div><div class="trip-right"><span class="status-p done">Completado</span><button class="trip-lnk">Ver bit&aacute;cora &rarr;</button></div></div>
+          <div class="trip-card"><div class="trip-ic b">&#x1F93F;</div><div><div class="trip-name">Islas del Rosario Weekend</div><div class="trip-meta">&#128205; Cartagena &middot; Ago 3&ndash;5, 2025 &middot; 6 inmersiones</div></div><div class="trip-right"><span class="status-p done">Completado</span><button class="trip-lnk">Ver bit&aacute;cora &rarr;</button></div></div>
+        </div>
+      </div>
+      <div class="esec" id="es-bita">
+        <div class="esec-head"><div class="esec-title">Mis <span>Bit&aacute;coras</span></div><span style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;color:var(--gris);text-transform:uppercase;letter-spacing:0.1em">34 inmersiones &middot; 68h</span></div>
+        <div class="bita-layout">
+          <div class="bita-list">
+            <div class="bita-item active" onclick="selectBita(0)">
+              <div class="bita-num">#034</div>
+              <div class="bita-place">Canal Darwin &mdash; Gal&aacute;pagos</div>
+              <div class="bita-date">14 Jul 2026 &middot; 08:42 AM</div>
+              <div class="bita-mini-stats">
+                <div class="bms"><span class="bms-v">32m</span><span class="bms-l">Prof</span></div>
+                <div class="bms"><span class="bms-v">48'</span><span class="bms-l">Dur</span></div>
+                <div class="bms"><span class="bms-v">26&deg;</span><span class="bms-l">Temp</span></div>
+                <div class="bms"><span class="bms-v">18m</span><span class="bms-l">Vis</span></div>
+              </div>
+              <div class="stars"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span></div>
+            </div>
+            <div class="bita-item " onclick="selectBita(1)">
+              <div class="bita-num">#033</div>
+              <div class="bita-place">Punta Vicente Roca</div>
+              <div class="bita-date">13 Jul 2026 &middot; 07:15 AM</div>
+              <div class="bita-mini-stats">
+                <div class="bms"><span class="bms-v">28m</span><span class="bms-l">Prof</span></div>
+                <div class="bms"><span class="bms-v">52'</span><span class="bms-l">Dur</span></div>
+                <div class="bms"><span class="bms-v">22&deg;</span><span class="bms-l">Temp</span></div>
+                <div class="bms"><span class="bms-v">15m</span><span class="bms-l">Vis</span></div>
+              </div>
+              <div class="stars"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-e">&#9733;</span></div>
+            </div>
+            <div class="bita-item " onclick="selectBita(2)">
+              <div class="bita-num">#028</div>
+              <div class="bita-place">Playa Blanca &mdash; Nqu&iacute;</div>
+              <div class="bita-date">9 Nov 2025 &middot; 06:55 AM</div>
+              <div class="bita-mini-stats">
+                <div class="bms"><span class="bms-v">18m</span><span class="bms-l">Prof</span></div>
+                <div class="bms"><span class="bms-v">41'</span><span class="bms-l">Dur</span></div>
+                <div class="bms"><span class="bms-v">29&deg;</span><span class="bms-l">Temp</span></div>
+                <div class="bms"><span class="bms-v">12m</span><span class="bms-l">Vis</span></div>
+              </div>
+              <div class="stars"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span></div>
+            </div>
+            <div class="bita-item " onclick="selectBita(3)">
+              <div class="bita-num">#022</div>
+              <div class="bita-place">Isla Grande &mdash; Rosario</div>
+              <div class="bita-date">4 Ago 2025 &middot; 09:10 AM</div>
+              <div class="bita-mini-stats">
+                <div class="bms"><span class="bms-v">14m</span><span class="bms-l">Prof</span></div>
+                <div class="bms"><span class="bms-v">38'</span><span class="bms-l">Dur</span></div>
+                <div class="bms"><span class="bms-v">28&deg;</span><span class="bms-l">Temp</span></div>
+                <div class="bms"><span class="bms-v">8m</span><span class="bms-l">Vis</span></div>
+              </div>
+              <div class="stars"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-e">&#9733;</span><span class="star-e">&#9733;</span></div>
+            </div>
+          </div>
+          <div id="bita-detail-wrap">
+            <div id="bita-panel-0" style="display:block">
+              <div class="bita-detail-card">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+                  <div><div class="bita-detail-title">Canal Darwin &mdash; Gal&aacute;pagos</div><div class="bita-detail-date">14 Jul 2026 &middot; 08:42 AM</div></div>
+                  <div class="stars" style="font-size:1rem"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span></div>
+                </div>
+                <div class="stat4">
+                  <div class="s4i"><div class="s4l">Profundidad</div><div class="s4v">32m</div></div>
+                  <div class="s4i"><div class="s4l">Duraci&oacute;n</div><div class="s4v">48'</div></div>
+                  <div class="s4i"><div class="s4l">Temperatura</div><div class="s4v">26&deg;</div></div>
+                  <div class="s4i"><div class="s4l">Visibilidad</div><div class="s4v">18m</div></div>
+                </div>
+              </div>
+              <div class="photos-card">
+                <div class="photos-head"><div class="photos-title">Fotos de la <span>inmersi&oacute;n</span></div><button class="btn-rojo" style="padding:7px 14px;font-size:0.66rem">+ Agregar foto</button></div>
+                <div class="photo-grid">
+                  <div class="photo-item">
+                    <div class="photo-img g1">
+                      <span class="photo-emoji">&#x1F93F;</span>
+                      <div class="photo-ov"><div class="photo-desc">Descenso al canal</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#e91e8c;background:rgba(233,30,140,0.12);border-color:#e91e8c44">@andrea_v</span> <span class="tag" style="color:#2196f3;background:rgba(33,150,243,0.12);border-color:#2196f344">@miguel_r</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                  <div class="photo-item">
+                    <div class="photo-img g3">
+                      <span class="photo-emoji">&#x1F988;</span>
+                      <div class="photo-ov"><div class="photo-desc">Tibur&oacute;n martillo</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#ED1C24;background:rgba(237,28,36,0.12);border-color:#ED1C2444">@carlos_m</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                  <div class="photo-item">
+                    <div class="photo-img g4">
+                      <span class="photo-emoji">&#x1F422;</span>
+                      <div class="photo-ov"><div class="photo-desc">Tortuga gigante</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#e91e8c;background:rgba(233,30,140,0.12);border-color:#e91e8c44">@andrea_v</span> <span class="tag" style="color:#ff9800;background:rgba(255,152,0,0.12);border-color:#ff980044">@sofia_k</span> <span class="tag" style="color:#4caf50;background:rgba(76,175,80,0.12);border-color:#4caf5044">@juan_p</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                  <div class="photo-item">
+                    <div class="photo-img g5">
+                      <span class="photo-emoji">&#x1F41F;</span>
+                      <div class="photo-ov"><div class="photo-desc">Cardumen al atardecer</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#2196f3;background:rgba(33,150,243,0.12);border-color:#2196f344">@miguel_r</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="community-bar">
+                  <div class="community-bar-label">En esta inmersi&oacute;n</div>
+                  <div class="community-avatars">
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#e91e8c">A</div><span class="comm-handle">@andrea_v</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#2196f3">M</div><span class="comm-handle">@miguel_r</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#ED1C24">C</div><span class="comm-handle">@carlos_m</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#ff9800">S</div><span class="comm-handle">@sofia_k</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#4caf50">J</div><span class="comm-handle">@juan_p</span></div>
+                  </div></div>
+              </div>
+            </div>
+            <div id="bita-panel-1" style="display:none">
+              <div class="bita-detail-card">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+                  <div><div class="bita-detail-title">Punta Vicente Roca</div><div class="bita-detail-date">13 Jul 2026 &middot; 07:15 AM</div></div>
+                  <div class="stars" style="font-size:1rem"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-e">&#9733;</span></div>
+                </div>
+                <div class="stat4">
+                  <div class="s4i"><div class="s4l">Profundidad</div><div class="s4v">28m</div></div>
+                  <div class="s4i"><div class="s4l">Duraci&oacute;n</div><div class="s4v">52'</div></div>
+                  <div class="s4i"><div class="s4l">Temperatura</div><div class="s4v">22&deg;</div></div>
+                  <div class="s4i"><div class="s4l">Visibilidad</div><div class="s4v">15m</div></div>
+                </div>
+              </div>
+              <div class="photos-card">
+                <div class="photos-head"><div class="photos-title">Fotos de la <span>inmersi&oacute;n</span></div><button class="btn-rojo" style="padding:7px 14px;font-size:0.66rem">+ Agregar foto</button></div>
+                <div class="photo-grid">
+                  <div class="photo-item">
+                    <div class="photo-img g1">
+                      <span class="photo-emoji">&#x1F42C;</span>
+                      <div class="photo-ov"><div class="photo-desc">Delfines en ruta</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#e91e8c;background:rgba(233,30,140,0.12);border-color:#e91e8c44">@andrea_v</span> <span class="tag" style="color:#ED1C24;background:rgba(237,28,36,0.12);border-color:#ED1C2444">@carlos_m</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                  <div class="photo-item">
+                    <div class="photo-img g7">
+                      <span class="photo-emoji">&#x1F9AD;</span>
+                      <div class="photo-ov"><div class="photo-desc">Lobo marino curioso</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#ff9800;background:rgba(255,152,0,0.12);border-color:#ff980044">@sofia_k</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="community-bar">
+                  <div class="community-bar-label">En esta inmersi&oacute;n</div>
+                  <div class="community-avatars">
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#e91e8c">A</div><span class="comm-handle">@andrea_v</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#ED1C24">C</div><span class="comm-handle">@carlos_m</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#ff9800">S</div><span class="comm-handle">@sofia_k</span></div>
+                  </div></div>
+              </div>
+            </div>
+            <div id="bita-panel-2" style="display:none">
+              <div class="bita-detail-card">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+                  <div><div class="bita-detail-title">Playa Blanca &mdash; Nqu&iacute;</div><div class="bita-detail-date">9 Nov 2025 &middot; 06:55 AM</div></div>
+                  <div class="stars" style="font-size:1rem"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span></div>
+                </div>
+                <div class="stat4">
+                  <div class="s4i"><div class="s4l">Profundidad</div><div class="s4v">18m</div></div>
+                  <div class="s4i"><div class="s4l">Duraci&oacute;n</div><div class="s4v">41'</div></div>
+                  <div class="s4i"><div class="s4l">Temperatura</div><div class="s4v">29&deg;</div></div>
+                  <div class="s4i"><div class="s4l">Visibilidad</div><div class="s4v">12m</div></div>
+                </div>
+              </div>
+              <div class="photos-card">
+                <div class="photos-head"><div class="photos-title">Fotos de la <span>inmersi&oacute;n</span></div><button class="btn-rojo" style="padding:7px 14px;font-size:0.66rem">+ Agregar foto</button></div>
+                <div class="photo-grid">
+                  <div class="photo-item">
+                    <div class="photo-img g3">
+                      <span class="photo-emoji">&#x1F433;</span>
+                      <div class="photo-ov"><div class="photo-desc">Ballena jorobada</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#4caf50;background:rgba(76,175,80,0.12);border-color:#4caf5044">@juan_p</span> <span class="tag" style="color:#ED1C24;background:rgba(237,28,36,0.12);border-color:#ED1C2444">@carlos_m</span> <span class="tag" style="color:#e91e8c;background:rgba(233,30,140,0.12);border-color:#e91e8c44">@andrea_v</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                  <div class="photo-item">
+                    <div class="photo-img g5">
+                      <span class="photo-emoji">&#x1F980;</span>
+                      <div class="photo-ov"><div class="photo-desc">Coral negro end&eacute;mico</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#2196f3;background:rgba(33,150,243,0.12);border-color:#2196f344">@miguel_r</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                  <div class="photo-item">
+                    <div class="photo-img g1">
+                      <span class="photo-emoji">&#x1F420;</span>
+                      <div class="photo-ov"><div class="photo-desc">El grupo en el fondo</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#ff9800;background:rgba(255,152,0,0.12);border-color:#ff980044">@sofia_k</span> <span class="tag" style="color:#4caf50;background:rgba(76,175,80,0.12);border-color:#4caf5044">@juan_p</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="community-bar">
+                  <div class="community-bar-label">En esta inmersi&oacute;n</div>
+                  <div class="community-avatars">
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#4caf50">J</div><span class="comm-handle">@juan_p</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#ED1C24">C</div><span class="comm-handle">@carlos_m</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#e91e8c">A</div><span class="comm-handle">@andrea_v</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#2196f3">M</div><span class="comm-handle">@miguel_r</span></div>
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#ff9800">S</div><span class="comm-handle">@sofia_k</span></div>
+                  </div></div>
+              </div>
+            </div>
+            <div id="bita-panel-3" style="display:none">
+              <div class="bita-detail-card">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+                  <div><div class="bita-detail-title">Isla Grande &mdash; Rosario</div><div class="bita-detail-date">4 Ago 2025 &middot; 09:10 AM</div></div>
+                  <div class="stars" style="font-size:1rem"><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-f">&#9733;</span><span class="star-e">&#9733;</span><span class="star-e">&#9733;</span></div>
+                </div>
+                <div class="stat4">
+                  <div class="s4i"><div class="s4l">Profundidad</div><div class="s4v">14m</div></div>
+                  <div class="s4i"><div class="s4l">Duraci&oacute;n</div><div class="s4v">38'</div></div>
+                  <div class="s4i"><div class="s4l">Temperatura</div><div class="s4v">28&deg;</div></div>
+                  <div class="s4i"><div class="s4l">Visibilidad</div><div class="s4v">8m</div></div>
+                </div>
+              </div>
+              <div class="photos-card">
+                <div class="photos-head"><div class="photos-title">Fotos de la <span>inmersi&oacute;n</span></div><button class="btn-rojo" style="padding:7px 14px;font-size:0.66rem">+ Agregar foto</button></div>
+                <div class="photo-grid">
+                  <div class="photo-item">
+                    <div class="photo-img g2">
+                      <span class="photo-emoji">&#x1F419;</span>
+                      <div class="photo-ov"><div class="photo-desc">Pulpo camuflado</div></div>
+                    </div>
+                    <div class="photo-tags">
+                      <div class="photo-tags-label">Personas etiquetadas</div>
+                      <div class="tags-row"><span class="tag" style="color:#e91e8c;background:rgba(233,30,140,0.12);border-color:#e91e8c44">@andrea_v</span><button class="tag-add">+ etiquetar</button></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="community-bar">
+                  <div class="community-bar-label">En esta inmersi&oacute;n</div>
+                  <div class="community-avatars">
+                    <div class="comm-av-wrap"><div class="comm-av" style="background:#e91e8c">A</div><span class="comm-handle">@andrea_v</span></div>
+                  </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="esec" id="es-colecciones">
+        <div class="esec-head"><div class="esec-title">Mis <span>Colecciones</span></div></div>
+        <div class="col-tabs">
+          <button class="col-tab on" onclick="setColTab(this,'peces')">&#x1F41F; Peces</button>
+          <button class="col-tab" onclick="setColTab(this,'animales')">&#x1F40B; Animales</button>
+          <button class="col-tab" onclick="setColTab(this,'lugares')">&#128205; Lugares</button>
+        </div>
+        <div class="col-panel" id="colpanel-peces">
+          <div class="col-stats"><div class="col-stat"><div class="col-stat-l">Especies</div><div class="col-stat-v">8</div></div><div class="col-stat"><div class="col-stat-l">Raras</div><div class="col-stat-v r">3</div></div><div class="col-stat"><div class="col-stat-l">Total avistamientos</div><div class="col-stat-v r">62</div></div></div>
+          <div class="col-grid">
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g1"><span class="col-emoji">&#x1F988;</span><span class="col-rare">Raro</span></div>
+              <div class="col-body"><div class="col-name">Tibur&oacute;n Martillo</div><div class="col-sci">Sphyrna lewini</div><div class="col-foot"><span class="col-loc">&#128205; Gal&aacute;pagos</span><span class="col-cnt">3&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Gal&aacute;pagos</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g9"><span class="col-emoji">&#x1F420;</span></div>
+              <div class="col-body"><div class="col-name">Pez Le&oacute;n</div><div class="col-sci">Pterois volitans</div><div class="col-foot"><span class="col-loc">&#128205; Rosario</span><span class="col-cnt">7&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Rosario</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g3"><span class="col-emoji">&#x1F421;</span></div>
+              <div class="col-body"><div class="col-name">Pez Globo</div><div class="col-sci">Arothron hispidus</div><div class="col-foot"><span class="col-loc">&#128205; San Andr&eacute;s</span><span class="col-cnt">12&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">San Andr&eacute;s</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g2"><span class="col-emoji">&#x1F41F;</span></div>
+              <div class="col-body"><div class="col-name">Pargo Rojo</div><div class="col-sci">Lutjanus campechanus</div><div class="col-foot"><span class="col-loc">&#128205; Cartagena</span><span class="col-cnt">24&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Cartagena</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g4"><span class="col-emoji">&#x1F991;</span><span class="col-rare">Raro</span></div>
+              <div class="col-body"><div class="col-name">Calamar Gigante</div><div class="col-sci">Architeuthis dux</div><div class="col-foot"><span class="col-loc">&#128205; Gal&aacute;pagos</span><span class="col-cnt">1&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Gal&aacute;pagos</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g6"><span class="col-emoji">&#x1F41F;</span><span class="col-rare">Raro</span></div>
+              <div class="col-body"><div class="col-name">Pez Vela</div><div class="col-sci">Istiophorus platypterus</div><div class="col-foot"><span class="col-loc">&#128205; Nqu&iacute;</span><span class="col-cnt">2&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Nqu&iacute;</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g5"><span class="col-emoji">&#x1F990;</span></div>
+              <div class="col-body"><div class="col-name">Camar&oacute;n Pistola</div><div class="col-sci">Alpheus heterochaelis</div><div class="col-foot"><span class="col-loc">&#128205; Rosario</span><span class="col-cnt">8&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Rosario</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g8"><span class="col-emoji">&#x1F420;</span></div>
+              <div class="col-body"><div class="col-name">Pez &Aacute;ngel Reina</div><div class="col-sci">Holacanthus ciliaris</div><div class="col-foot"><span class="col-loc">&#128205; San Andr&eacute;s</span><span class="col-cnt">5&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">San Andr&eacute;s</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-panel" id="colpanel-animales" style="display:none">
+          <div class="col-stats"><div class="col-stat"><div class="col-stat-l">Especies</div><div class="col-stat-v">6</div></div><div class="col-stat"><div class="col-stat-l">En peligro</div><div class="col-stat-v r">2</div></div><div class="col-stat"><div class="col-stat-l">Total avistamientos</div><div class="col-stat-v r">38</div></div></div>
+          <div class="col-grid">
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g3"><span class="col-emoji">&#x1F433;</span><span class="col-rare">Raro</span></div>
+              <div class="col-body"><div class="col-name">Ballena Jorobada</div><div class="col-sci">Megaptera novaeangliae</div><div class="col-foot"><span class="col-loc">&#128205; Nqu&iacute;</span><span class="col-cnt">4&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Nqu&iacute;</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g7"><span class="col-emoji">&#x1F422;</span></div>
+              <div class="col-body"><div class="col-name">Tortuga Verde</div><div class="col-sci">Chelonia mydas</div><div class="col-foot"><span class="col-loc">&#128205; Gal&aacute;pagos</span><span class="col-cnt">9&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Gal&aacute;pagos</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g8"><span class="col-emoji">&#x1F9AD;</span></div>
+              <div class="col-body"><div class="col-name">Lobo Marino</div><div class="col-sci">Zalophus wollebaeki</div><div class="col-foot"><span class="col-loc">&#128205; Gal&aacute;pagos</span><span class="col-cnt">6&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Gal&aacute;pagos</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g1"><span class="col-emoji">&#x1F42C;</span></div>
+              <div class="col-body"><div class="col-name">Delf&iacute;n Nariz Botella</div><div class="col-sci">Tursiops truncatus</div><div class="col-foot"><span class="col-loc">&#128205; Cartagena</span><span class="col-cnt">11&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Cartagena</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g2"><span class="col-emoji">&#x1F985;</span></div>
+              <div class="col-body"><div class="col-name">Fragata Com&uacute;n</div><div class="col-sci">Fregata magnificens</div><div class="col-foot"><span class="col-loc">&#128205; San Andr&eacute;s</span><span class="col-cnt">7&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">San Andr&eacute;s</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g6"><span class="col-emoji">&#x1F988;</span><span class="col-rare">Raro</span></div>
+              <div class="col-body"><div class="col-name">Tibur&oacute;n Ballena</div><div class="col-sci">Rhincodon typus</div><div class="col-foot"><span class="col-loc">&#128205; Nqu&iacute;</span><span class="col-cnt">1&times;</span></div></div>
+              <div class="col-expand"><div class="col-expand-row"><div><div class="ceg-item-l">&Uacute;ltimo avistamiento</div><div class="ceg-item-v">Nqu&iacute;</div></div><button class="btn-sm">Ver en bit&aacute;cora</button></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-panel" id="colpanel-lugares" style="display:none">
+          <div class="col-stats"><div class="col-stat"><div class="col-stat-l">Spots</div><div class="col-stat-v">6</div></div><div class="col-stat"><div class="col-stat-l">Pa&iacute;ses</div><div class="col-stat-v a">3</div></div><div class="col-stat"><div class="col-stat-l">Inmersiones totales</div><div class="col-stat-v r">18</div></div></div>
+          <div class="col-grid">
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g1"><span class="col-emoji">&#x1F3DD;&#xFE0F;</span><span class="col-visits">3&times;</span></div>
+              <div class="col-body"><div class="col-name">Canal Darwin</div><div class="col-sci" style="font-style:normal">Ecuador</div><div class="col-foot"><span class="col-loc">Inmersi&oacute;n</span></div></div>
+              <div class="col-expand"><div class="col-expand-grid"><div><div class="ceg-item-l">Prof. m&aacute;x.</div><div class="ceg-item-v">40m</div></div><div><div class="ceg-item-l">Visibilidad</div><div class="ceg-item-v">20m</div></div><div><div class="ceg-item-l">Dificultad</div><div class="ceg-item-v">Avanzado</div></div><div><div class="ceg-item-l">Visitas</div><div class="ceg-item-v">3 veces</div></div></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g3"><span class="col-emoji">&#x1F30A;</span><span class="col-visits">2&times;</span></div>
+              <div class="col-body"><div class="col-name">Playa Blanca</div><div class="col-sci" style="font-style:normal">Colombia</div><div class="col-foot"><span class="col-loc">Inmersi&oacute;n</span></div></div>
+              <div class="col-expand"><div class="col-expand-grid"><div><div class="ceg-item-l">Prof. m&aacute;x.</div><div class="ceg-item-v">22m</div></div><div><div class="ceg-item-l">Visibilidad</div><div class="ceg-item-v">15m</div></div><div><div class="ceg-item-l">Dificultad</div><div class="ceg-item-v">Intermedio</div></div><div><div class="ceg-item-l">Visitas</div><div class="ceg-item-v">2 veces</div></div></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g6"><span class="col-emoji">&#x26F5;</span><span class="col-visits">8&times;</span></div>
+              <div class="col-body"><div class="col-name">Bah&iacute;a de Cartagena</div><div class="col-sci" style="font-style:normal">Colombia</div><div class="col-foot"><span class="col-loc">Navegaci&oacute;n</span></div></div>
+              <div class="col-expand"><div class="col-expand-grid"><div><div class="ceg-item-l">Prof. m&aacute;x.</div><div class="ceg-item-v">18m</div></div><div><div class="ceg-item-l">Visibilidad</div><div class="ceg-item-v">8m</div></div><div><div class="ceg-item-l">Dificultad</div><div class="ceg-item-v">B&aacute;sico</div></div><div><div class="ceg-item-l">Visitas</div><div class="ceg-item-v">8 veces</div></div></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g4"><span class="col-emoji">&#x26F0;&#xFE0F;</span><span class="col-visits">2&times;</span></div>
+              <div class="col-body"><div class="col-name">Punta Vicente Roca</div><div class="col-sci" style="font-style:normal">Ecuador</div><div class="col-foot"><span class="col-loc">Inmersi&oacute;n</span></div></div>
+              <div class="col-expand"><div class="col-expand-grid"><div><div class="ceg-item-l">Prof. m&aacute;x.</div><div class="ceg-item-v">35m</div></div><div><div class="ceg-item-l">Visibilidad</div><div class="ceg-item-v">18m</div></div><div><div class="ceg-item-l">Dificultad</div><div class="ceg-item-v">Avanzado</div></div><div><div class="ceg-item-l">Visitas</div><div class="ceg-item-v">2 veces</div></div></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g9"><span class="col-emoji">&#x1F33A;</span><span class="col-visits">4&times;</span></div>
+              <div class="col-body"><div class="col-name">Laguna del Cove</div><div class="col-sci" style="font-style:normal">Colombia</div><div class="col-foot"><span class="col-loc">Kitesurf</span></div></div>
+              <div class="col-expand"><div class="col-expand-grid"><div><div class="ceg-item-l">Prof. m&aacute;x.</div><div class="ceg-item-v">&mdash;</div></div><div><div class="ceg-item-l">Visibilidad</div><div class="ceg-item-v">Sup.</div></div><div><div class="ceg-item-l">Dificultad</div><div class="ceg-item-v">Intermedio</div></div><div><div class="ceg-item-l">Visitas</div><div class="ceg-item-v">4 veces</div></div></div></div>
+            </div>
+            <div class="col-card" onclick="toggleCol(this)">
+              <div class="col-img g5"><span class="col-emoji">&#x1F5FA;&#xFE0F;</span><span class="col-visits">1&times;</span></div>
+              <div class="col-body"><div class="col-name">Estrecho de Gibraltar</div><div class="col-sci" style="font-style:normal">Espa&ntilde;a</div><div class="col-foot"><span class="col-loc">Kitesurf</span></div></div>
+              <div class="col-expand"><div class="col-expand-grid"><div><div class="ceg-item-l">Prof. m&aacute;x.</div><div class="ceg-item-v">&mdash;</div></div><div><div class="ceg-item-l">Visibilidad</div><div class="ceg-item-v">Sup.</div></div><div><div class="ceg-item-l">Dificultad</div><div class="ceg-item-v">Avanzado</div></div><div><div class="ceg-item-l">Visitas</div><div class="ceg-item-v">1 veces</div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="esec" id="es-pagos">
+        <div class="esec-head"><div class="esec-title">Mis <span>Pagos</span></div></div>
+        <div class="pago-card pending">
+          <div class="pago-head"><div><div class="pago-name">Gal&aacute;pagos Deep Expedition</div><div class="pago-date">Jul 14&ndash;22, 2026 &middot; Ecuador &middot; Pago pendiente</div></div><div><div class="pago-total">$2,400</div><div class="pago-total-l">USD Total</div></div></div>
+          <div class="pbar-labels"><span>Pagado: <strong>$720</strong></span><span>Saldo: <strong>$1,680</strong></span></div>
+          <div class="pbar"><div class="pbar-fill" style="width:30%;background:linear-gradient(90deg,var(--rojo),#ff5050)"></div></div>
+          <div class="cuotas">
+            <div class="cuota"><div class="cdot paid"></div><div class="cuota-name">Dep&oacute;sito de reserva (30%)</div><div class="cuota-date">Pagado &middot; 10 Abr</div><div class="cuota-amt">$720</div><div class="cuota-st paid">Pagado</div></div>
+            <div class="cuota"><div class="cdot pend"></div><div class="cuota-name">Segundo abono (40%)</div><div class="cuota-date">Vence 14 Jun</div><div class="cuota-amt">$960</div><div class="cuota-st pend">Pendiente</div></div>
+            <div class="cuota"><div class="cdot fut"></div><div class="cuota-name">Saldo final (30%)</div><div class="cuota-date">Vence 7 Jul</div><div class="cuota-amt">$720</div><div class="cuota-st fut">Pr&oacute;ximo</div></div>
+          </div>
+          <div style="display:flex;gap:10px"><button class="btn-rojo">Pagar $960 ahora</button><button class="btn-outline">Subir comprobante</button></div>
+        </div>
+        <div class="pago-card" style="opacity:0.6">
+          <div class="pago-head"><div><div class="pago-name">Kite Sessions Bocachico</div><div class="pago-date">Mar 10&ndash;15, 2026 &middot; Completado</div></div><div><div class="pago-total" style="color:var(--verde)">$1,100</div><div class="pago-total-l" style="color:var(--verde)">Pagado &#10003;</div></div></div>
+          <div class="pbar"><div class="pbar-fill" style="width:100%;background:linear-gradient(90deg,var(--verde),#60c090)"></div></div>
+        </div>
+      </div>
+      <div class="esec" id="es-certs">
+        <div class="esec-head"><div class="esec-title">Mis <span>Certificados</span></div></div>
+        <div class="cert-grid">
+          <div class="cert-card"><div class="cert-ic">&#x1F93F;</div><div class="cert-name">PADI Divemaster</div><div class="cert-org">PADI &middot; #DM-20183042</div><div class="cert-valid">&#9679; Vigente &middot; Sin vencimiento</div></div>
+          <div class="cert-card"><div class="cert-ic">&#x1F93F;</div><div class="cert-name">PADI Advanced Open Water</div><div class="cert-org">PADI &middot; #AOW-1874556</div><div class="cert-valid">&#9679; Vigente &middot; Sin vencimiento</div></div>
+          <div class="cert-card"><div class="cert-ic">&#x1FA81;</div><div class="cert-name">IKO Level 2 Instructor</div><div class="cert-org">IKO &middot; #IKO-COL-44712</div><div class="cert-valid">&#9679; Vigente &middot; Vence Dic 2027</div></div>
+          <div class="cert-card" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:115px;text-align:center;opacity:0.5"><div style="font-size:2rem;margin-bottom:8px">+</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:0.74rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--gris)">Subir certificado</div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<div class="view" id="view-comunidad">
+  <div class="page-hero">
+    <div class="page-h1">Comunidad <span>+AZUL</span></div>
+    <div class="page-sub">6.200 aventureros compartiendo experiencias, datos del mar, spots y pr&oacute;ximas expediciones.</div>
+  </div>
+  <div class="com-layout">
+    <div class="com-main">
+      <div class="sec-head" style="margin-bottom:18px">
+        <div class="sec-title" style="font-size:1.4rem">Blog &amp; <span>Foro</span></div>
+        <button class="btn-rojo" style="padding:9px 18px;font-size:0.74rem">+ Nueva publicaci&oacute;n</button>
+      </div>
+      <div class="post-card"><div class="post-head"><div class="post-av" style="background:var(--rojo);color:white">C</div><div class="post-author">+AZUL &middot; Instructor</div><div class="post-time">Hoy &middot; 9:30 AM</div></div><div class="post-title">C&oacute;mo preparar tu equipo para inmersiones en aguas fr&iacute;as del Pac&iacute;fico</div><div class="post-excerpt">Las corrientes fr&iacute;as del Pac&iacute;fico colombiano exigen preparaci&oacute;n diferente al Caribe. Traje de 5mm m&iacute;nimo, guantes y casco. Aqu&iacute; todo lo que debes revisar...</div><div class="post-foot"><span>&#10084;&#65039; 47</span><span>&#128172; 12</span><span>&#128065; 234</span><span class="post-tag" style="color:var(--rojo);background:rgba(237,28,36,0.06);border:1px solid rgba(237,28,36,0.2)">T&eacute;cnica</span></div></div>
+      <div class="post-card"><div class="post-head"><div class="post-av" style="background:rgba(224,112,32,0.15);color:#c06010">A</div><div class="post-author">Andrea V.</div><div class="post-time">Ayer &middot; 7:14 PM</div></div><div class="post-title">&#161;Mi experiencia en el tour de Nqu&iacute; &mdash; 10/10!</div><div class="post-excerpt">Nunca pens&eacute; que ver&iacute;a una ballena jorobada a 5 metros bajo el agua. Los instructores de +AZUL hacen que te sientas como viajando con viejos amigos...</div><div class="post-foot"><span>&#10084;&#65039; 83</span><span>&#128172; 28</span><span>&#128065; 512</span><span class="post-tag" style="color:#c06010;background:rgba(192,96,16,0.07);border:1px solid rgba(192,96,16,0.2)">Testimonio</span></div></div>
+      <div class="post-card"><div class="post-head"><div class="post-av" style="background:rgba(27,20,100,0.1);color:var(--azul2)">M</div><div class="post-author">Miguel R.</div><div class="post-time">18 may &middot; 3:45 PM</div></div><div class="post-title">&#191;Alguien ha buceado en el Atol&oacute;n de San Bernardo?</div><div class="post-excerpt">Estoy planeando un viaje y quisiera info sobre condiciones de visibilidad, corrientes y fauna en esta &eacute;poca del a&ntilde;o...</div><div class="post-foot"><span>&#10084;&#65039; 14</span><span>&#128172; 9</span><span>&#128065; 167</span><span class="post-tag" style="color:var(--gris);background:var(--fondo);border:1px solid var(--linea2)">Pregunta</span></div></div>
+      <div class="post-card"><div class="post-head"><div class="post-av" style="background:var(--azul);color:white">C</div><div class="post-author">+AZUL &middot; Instructor</div><div class="post-time">15 may &middot; 10:00 AM</div></div><div class="post-title">Datos del mar: corrientes del Pac&iacute;fico junio&ndash;agosto 2026</div><div class="post-excerpt">An&aacute;lisis de condiciones para los pr&oacute;ximos 3 meses: temperatura superficial, corriente de Humboldt, mareas en Choc&oacute;...</div><div class="post-foot"><span>&#10084;&#65039; 102</span><span>&#128172; 34</span><span>&#128065; 891</span><span class="post-tag" style="color:var(--azul2);background:rgba(27,20,100,0.06);border:1px solid rgba(27,20,100,0.18)">Datos del Mar</span></div></div>
+    </div>
+    <aside class="com-aside">
+      <div class="mar-widget">
+        <div class="mar-title">Condiciones del Mar</div>
+        <div class="mar-loc">&#128205; Cartagena &middot; 20 may 2026</div>
+        <div class="mar-stats">
+          <div class="mar-stat"><span class="mar-stat-v">28&deg;</span><span class="mar-stat-l">Temp. agua</span></div>
+          <div class="mar-stat"><span class="mar-stat-v">1.2m</span><span class="mar-stat-l">Oleaje</span></div>
+          <div class="mar-stat"><span class="mar-stat-v">18kt</span><span class="mar-stat-l">Viento</span></div>
+          <div class="mar-stat"><span class="mar-stat-v">12m</span><span class="mar-stat-l">Visibilidad</span></div>
+        </div>
+      </div>
+      <div style="margin-bottom:22px">
+        <div class="aside-tit">Pr&oacute;ximos Tours</div>
+        <div class="mini-tour"><div class="mini-dot" style="background:rgba(27,20,100,0.08)">&#x1F93F;</div><div><div class="mini-name">Gal&aacute;pagos Expedition</div><div class="mini-date">Jul 14 &middot; 3 cupos</div></div></div>
+        <div class="mini-tour"><div class="mini-dot" style="background:rgba(237,28,36,0.08)">&#x1FA81;</div><div><div class="mini-name">Bocachico Kite</div><div class="mini-date">Jun 28 &middot; 5 cupos</div></div></div>
+        <div class="mini-tour"><div class="mini-dot" style="background:rgba(27,20,100,0.08)">&#9973;</div><div><div class="mini-name">Velero Caribe</div><div class="mini-date">Jul 26 &middot; 6 cupos</div></div></div>
+        <div class="mini-tour"><div class="mini-dot" style="background:rgba(27,20,100,0.08)">&#x1F93F;</div><div><div class="mini-name">Nqu&iacute; Wildlife</div><div class="mini-date">Sep 5 &middot; 8 cupos</div></div></div>
+      </div>
+      <div class="com-stats-box">
+        <div class="aside-tit">La comunidad</div>
+        <div class="cs-row"><span class="cs-l">Seguidores</span><span class="cs-v" style="color:var(--rojo)">6,200</span></div>
+        <div class="cs-row"><span class="cs-l">Inmersiones registradas</span><span class="cs-v" style="color:var(--azul)">847</span></div>
+        <div class="cs-row"><span class="cs-l">Destinos +AZUL</span><span class="cs-v" style="color:var(--azul)">34</span></div>
+        <div class="cs-row"><span class="cs-l">Horas navegaci&oacute;n</span><span class="cs-v" style="color:var(--rojo)">2,000+</span></div>
+      </div>
+    </aside>
+  </div>
+</div>
+<script>
+function showView(id, btn) {
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(b){ b.classList.remove('active'); });
+  var v = document.getElementById('view-' + id);
+  if (v) v.classList.add('active');
+  if (btn) btn.classList.add('active');
+  else {
+    var btns = document.querySelectorAll('.nav-btn');
+    var map = {home:0,tours:1,espacio:2,comunidad:3};
+    if (map[id] !== undefined) btns[map[id]].classList.add('active');
+  }
+}
+function showE(sec, btn) {
+  document.querySelectorAll('.esec').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.sb-item').forEach(function(b){ b.classList.remove('sel'); });
+  var s = document.getElementById('es-' + sec);
+  if (s) s.classList.add('active');
+  if (btn) btn.classList.add('sel');
+}
+function setF(btn, type) {
+  document.querySelectorAll('.fbtn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  document.querySelectorAll('.tc-big').forEach(function(c){
+    if (type === 'all') { c.style.opacity = '1'; c.style.transform = ''; return; }
+    var t = c.dataset.t || '';
+    if (t.indexOf(type) >= 0) { c.style.opacity = '1'; c.style.transform = ''; }
+    else { c.style.opacity = '0.2'; c.style.transform = 'scale(0.97)'; }
+  });
+}
+function selectBita(idx) {
+  document.querySelectorAll('.bita-item').forEach(function(el, i){
+    el.classList.toggle('active', i === idx);
+  });
+  for (var i = 0; i < 4; i++) {
+    var panel = document.getElementById('bita-panel-' + i);
+    if (panel) panel.style.display = i === idx ? 'block' : 'none';
+  }
+}
+function setColTab(btn, tab) {
+  document.querySelectorAll('.col-tab').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  document.querySelectorAll('.col-panel').forEach(function(p){ p.style.display = 'none'; });
+  var panel = document.getElementById('colpanel-' + tab);
+  if (panel) panel.style.display = 'block';
+}
+function toggleCol(card) {
+  var isOpen = card.classList.contains('open');
+  document.querySelectorAll('.col-card.open').forEach(function(c){ c.classList.remove('open'); });
+  if (!isOpen) card.classList.add('open');
+}
+</script>
+</body>
+</html>
